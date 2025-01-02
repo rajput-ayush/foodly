@@ -7,7 +7,7 @@ import 'package:foodly/common/reusable_text.dart';
 import 'package:foodly/constants/constants.dart';
 import 'package:foodly/hooks/fetch_all_categories.dart';
 import 'package:foodly/models/categories.dart';
-import 'package:foodly/shimmers/foodlist_shimmer.dart';
+import 'package:foodly/common/shimmers/foodlist_shimmer.dart';
 import 'package:foodly/views/category/widget/category_tile.dart';
 
 class AllCategories extends HookWidget {

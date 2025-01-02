@@ -7,7 +7,7 @@ import 'package:foodly/common/reusable_text.dart';
 import 'package:foodly/constants/constants.dart';
 import 'package:foodly/hooks/fetch_all_restaurant.dart';
 import 'package:foodly/models/restaurants_model.dart';
-import 'package:foodly/shimmers/foodlist_shimmer.dart';
+import 'package:foodly/common/shimmers/foodlist_shimmer.dart';
 import 'package:foodly/views/home/widgets/restaurant_tile.dart';
 
 class NearbyRestaurants extends HookWidget {

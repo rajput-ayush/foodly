@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:foodly/hooks/fetch_foods.dart';
 import 'package:foodly/models/foods_model.dart';
-import 'package:foodly/shimmers/nearby_shimmer.dart';
+import 'package:foodly/common/shimmers/nearby_shimmer.dart';
 import 'package:foodly/views/home/widgets/food_widget.dart';
 
 class FoodList extends HookWidget {

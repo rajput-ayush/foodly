@@ -4,7 +4,7 @@ import 'package:foodly/controllers/tab_index_controller.dart';
 import 'package:foodly/views/cart/cart_page.dart';
 import 'package:foodly/views/home/home_page.dart';
 import 'package:foodly/views/profile/profile_page.dart';
-import 'package:foodly/views/search/searchPage.dart';
+import 'package:foodly/views/search/search_page.dart';
 import 'package:get/get.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
