@@ -26,6 +26,19 @@ class HomePage extends StatelessWidget {
           containerContent: Column(
             children: [
               const CategoryList(),
+
+            Heading(
+                text: "Try Something New",
+                OnTap: () {
+                  Get.to(() => const TrySomethingNew(),
+                      transition: Transition.cupertino,
+                      duration: const Duration(milliseconds: 900));
+                },
+              ),
+
+              const FoodList(),
+
+
               Heading(
                 text: "Nearby Restaurants",
                 OnTap: () {
@@ -37,16 +50,6 @@ class HomePage extends StatelessWidget {
 
               const NearbyRestaurantList(),
 
-              Heading(
-                text: "Try Something New",
-                OnTap: () {
-                  Get.to(() => const TrySomethingNew(),
-                      transition: Transition.cupertino,
-                      duration: const Duration(milliseconds: 900));
-                },
-              ),
-
-              const FoodList(),
 
               Heading(
                 text: "Food Closer to you",

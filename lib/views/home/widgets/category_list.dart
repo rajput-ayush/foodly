@@ -14,7 +14,6 @@ class CategoryList extends HookWidget {
     final hookResult = useFetchCategories();
     List<CategoriesModel>? categoriesList = hookResult.data;
     final isLoading = hookResult.isLoading;
-    final error = hookResult.error;
 
     return isLoading
         ? const CatergoriesShimmer()
@@ -23,10 +22,13 @@ class CategoryList extends HookWidget {
             padding: EdgeInsets.only(left: 12.w, top: 10.h),
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: List.generate(categoriesList!.length, (i) {
-                CategoriesModel category = categoriesList[i];
-                return CategoryWidget(category: category);
-              }),
+              children: List.generate(
+                categoriesList!.length,
+                (i) {
+                  CategoriesModel category = categoriesList[i];
+                  return CategoryWidget(category: category);
+                },
+              ),
             ),
           );
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:foodly/constants/constants.dart';
 import 'package:foodly/models/api_error.dart';
 import 'package:foodly/models/categories.dart';
@@ -18,14 +19,13 @@ FetchHook useFetchAllCategories() {
       Uri url = Uri.parse('$appBaseUrl/api/category');
       final response = await http.get(url);
 
-
       if (response.statusCode == 200) {
         categoriesItems.value = categoriesModelFromJson(response.body);
       } else {
         appiError.value = apiErrorFromJson(response.body);
       }
     } catch (e) {
-      error.value = e as Exception;
+      debugPrint(e.toString());
     } finally {
       isLoading.value = false;
     }
@@ -40,7 +40,6 @@ FetchHook useFetchAllCategories() {
     isLoading.value = true;
     fetchData();
   }
-
 
   return FetchHook(
     data: categoriesItems.value,

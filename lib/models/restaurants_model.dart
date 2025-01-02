@@ -2,10 +2,11 @@ import 'dart:convert';
 
 List<RestaurantsModel> restaurantsModelFromJson(String str) => List<RestaurantsModel>.from(json.decode(str).map((x) => RestaurantsModel.fromJson(x)));
 
+
 String restaurantsModelToJson(List<RestaurantsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class RestaurantsModel {
-    final String id;
+     final String id;
     final String title;
     final String time;
     final String imageUrl;
@@ -23,7 +24,7 @@ class RestaurantsModel {
     final Coords coords;
 
     RestaurantsModel({
-        required this.id,
+         required this.id,
         required this.title,
         required this.time,
         required this.imageUrl,
@@ -47,7 +48,7 @@ class RestaurantsModel {
         time: json["time"],
         imageUrl: json["imageUrl"],
         foods: List<dynamic>.from(json["foods"].map((x) => x)),
-        pickup: json["pickup"],
+        pickup: json["pickUp"],
         delivery: json["delivery"],
         owner: json["owner"],
         isAvailable: json["isAvailable"],
