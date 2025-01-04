@@ -188,7 +188,7 @@ List<Map<String, dynamic>> foods = [
     "_id": "653168e9f94c6496dc84f3bf",
     "title": "Spaghetti Carbonara",
     "foodTags": ["Italian", "Creamy", "Pasta", "Bacon", "Egg"],
-    "foodType": ["Main Course", "Lunch", null],
+    "foodType": ["Main Course", "Lunch"],
     "code": "41007428",
     "isAvailable": true,
     "restaurant": "6530ea6bc9e72013e5b6592d",
