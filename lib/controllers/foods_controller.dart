@@ -1,5 +1,5 @@
 import 'package:foodly/models/foods_model.dart';
-import 'package:foodly/models/hook_models/additive_obs.dart';
+import 'package:foodly/models/additive_obs.dart';
 import 'package:get/get.dart';
 
 class FoodController extends GetxController {

@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_final_fields
-
 import 'package:flutter/material.dart';
 import 'package:foodly/constants/constants.dart';
 import 'package:foodly/models/api_error.dart';
