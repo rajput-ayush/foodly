@@ -6,16 +6,21 @@ import 'package:foodly/common/app_style.dart';
 import 'package:foodly/common/reusable_text.dart';
 import 'package:foodly/constants/constants.dart';
 import 'package:foodly/models/foods_model.dart';
+import 'package:foodly/views/food/food_page.dart';
+import 'package:get/get.dart';
 
 class FoodTile extends StatelessWidget {
-  const FoodTile({super.key, required this.food});
+  const FoodTile({super.key, required this.food, this.color});
 
   final FoodsModel food;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(() => FoodPage(food: food));
+      },
       child: Stack(
         clipBehavior: Clip.hardEdge,
         children: [
@@ -24,7 +29,7 @@ class FoodTile extends StatelessWidget {
             height: 70.h,
             width: width,
             decoration: BoxDecoration(
-                color: kOffWhite, borderRadius: BorderRadius.circular(9.r)),
+                color: color??kOffWhite, borderRadius: BorderRadius.circular(9.r)),
             child: Container(
               padding: EdgeInsets.all(4.r),
               child: Row(

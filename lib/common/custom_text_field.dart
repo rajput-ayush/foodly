@@ -4,16 +4,18 @@ import 'package:foodly/common/app_style.dart';
 import 'package:foodly/constants/constants.dart';
 
 class CustomTextWidget extends StatelessWidget {
-  const CustomTextWidget(
-      {super.key,
-      this.keyboardType,
-      this.controller,
-      this.onEditingComplete,
-      this.obscureText,
-      this.suffixIcon,
-      this.validator,
-      this.prefixIcon,
-      this.hintText});
+  const CustomTextWidget({
+    super.key,
+    this.keyboardType,
+    this.controller,
+    this.onEditingComplete,
+    this.obscureText,
+    this.suffixIcon,
+    this.validator,
+    this.prefixIcon,
+    this.hintText,
+    this.maxLines,
+  });
 
   final TextInputType? keyboardType;
   final TextEditingController? controller;
@@ -23,6 +25,7 @@ class CustomTextWidget extends StatelessWidget {
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
   final String? hintText;
+  final int? maxLines;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,6 +36,7 @@ class CustomTextWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(9.r),
       ),
       child: TextFormField(
+        maxLines: maxLines??1,
         controller: controller,
         keyboardType: keyboardType,
         onEditingComplete: onEditingComplete,

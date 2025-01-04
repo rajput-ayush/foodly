@@ -20,6 +20,7 @@ FetchHook useFetchAllCategories() {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
+        print(response.body);
         categoriesItems.value = categoriesModelFromJson(response.body);
       } else {
         appiError.value = apiErrorFromJson(response.body);

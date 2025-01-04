@@ -1,13 +1,18 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
-import 'package:foodly/constants/constants.dart';
-import 'package:foodly/models/api_error.dart';
-import 'package:foodly/models/categories.dart';
-import 'package:foodly/models/hook_models/hook_result.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:foodly/constants/constants.dart';
+import 'package:foodly/controllers/categories_controller.dart';
+import 'package:foodly/models/api_error.dart';
+import 'package:foodly/models/foods_model.dart';
+import 'package:foodly/models/hook_models/food_hook.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-FetchHook useFetchCategories() {
-  final categoriesItems = useState<List<CategoriesModel>?>(null);
+FetchFood useFetchFoodsByCategory(String code) {
+  final controller = Get.put(CategoryController());
+  final foods = useState<List<FoodsModel>>([]);
   final isLoading = useState<bool>(false);
   final error = useState<Exception?>(null);
   final appiError = useState<ApiError?>(null);
@@ -16,13 +21,11 @@ FetchHook useFetchCategories() {
     isLoading.value = true;
 
     try {
-      Uri url = Uri.parse('$appBaseUrl/api/category/random');
+      Uri url = Uri.parse('$appBaseUrl/api/foods/${controller.categoryValue}/$code');
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        categoriesItems.value = categoriesModelFromJson(response.body);
-      } else {
-        appiError.value = apiErrorFromJson(response.body);
+        foods.value = foodsModelFromJson(response.body);
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -34,6 +37,7 @@ FetchHook useFetchCategories() {
   useEffect(() {
     Future.delayed(const Duration(seconds: 3));
     fetchData();
+
     return null;
   }, []);
 
@@ -42,8 +46,8 @@ FetchHook useFetchCategories() {
     fetchData();
   }
 
-  return FetchHook(
-    data: categoriesItems.value,
+  return FetchFood(
+    data: foods.value,
     isLoading: isLoading.value,
     error: error.value,
     refetch: refetch,
