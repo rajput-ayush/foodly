@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-String googleApiKey = '';
 
 const kPrimary = Color(0xFF30b9b2);
 const kPrimaryLight = Color(0xFF40F3EA);
@@ -21,6 +20,8 @@ double width = 375.w;
 
 
 const String appBaseUrl = "http://192.168.0.195:6013";
+
+const String googleApiKey = "AIzaSyBlJ0MJjPVVMZ52bDdFdvbkpBPEi-Aaz9Y";
 
 
 final List<String> verificationReasons = [

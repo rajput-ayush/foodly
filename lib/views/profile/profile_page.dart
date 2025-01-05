@@ -7,6 +7,7 @@ import 'package:foodly/controllers/login_controller.dart';
 import 'package:foodly/models/login_response.dart';
 import 'package:foodly/views/auth/login_redirect.dart';
 import 'package:foodly/views/auth/verification_page.dart';
+import 'package:foodly/views/profile/address_page.dart';
 import 'package:foodly/views/profile/widget/profile_app_bar.dart';
 import 'package:foodly/constants/constants.dart';
 import 'package:foodly/views/profile/widget/profile_tile_widget.dart';
@@ -89,7 +90,12 @@ class ProfilePage extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   ProfileTileWidget(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => const Addresses(),
+                        transition: Transition.rightToLeft,
+                        duration: const Duration(milliseconds: 900)
+                        );
+                      },
                       title: "Shipping Address",
                       icon: SimpleLineIcons.location_pin),
                   ProfileTileWidget(

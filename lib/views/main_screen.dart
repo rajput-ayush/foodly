@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:foodly/constants/constants.dart';
 import 'package:foodly/controllers/tab_index_controller.dart';
+import 'package:foodly/hooks/fetch_default.dart';
 import 'package:foodly/views/cart/cart_page.dart';
 import 'package:foodly/views/home/home_page.dart';
 import 'package:foodly/views/profile/profile_page.dart';
 import 'package:foodly/views/search/search_page.dart';
 import 'package:get/get.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get_storage/get_storage.dart';
 
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
@@ -20,6 +22,12 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+    String? token = box.read("token");
+    debugPrint(token);
+    if (token != null) {
+      useFetchDefault();
+    }
     final controller = Get.put(TabIndexController());
     return Obx(
       () => Scaffold(
