@@ -1,5 +1,7 @@
-import 'package:foodly/models/foods_model.dart';
+// ignore_for_file: prefer_final_fields
+
 import 'package:foodly/models/additive_obs.dart';
+import 'package:foodly/models/foods_model.dart';
 import 'package:get/get.dart';
 
 class FoodController extends GetxController {
@@ -38,6 +40,20 @@ class FoodController extends GetxController {
         additivesList.add(additive);
       }
     }
+  }
+
+  List<String> getCartAdditive() {
+    List<String> additives = [];
+
+    for (var addtive in additivesList) {
+      if (addtive.isChecked.value && !additives.contains(addtive.title)) {
+        additives.add(addtive.title);
+      } else if(!addtive.isChecked.value && additives.contains(addtive.title)) {
+        additives.remove(addtive.title);
+
+      }
+    }
+    return additives;
   }
 
   RxDouble _totalPrice = 0.0.obs;

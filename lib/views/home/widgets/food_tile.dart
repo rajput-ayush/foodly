@@ -5,6 +5,8 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:foodly/common/app_style.dart';
 import 'package:foodly/common/reusable_text.dart';
 import 'package:foodly/constants/constants.dart';
+import 'package:foodly/controllers/cart_controller.dart';
+import 'package:foodly/models/cart_request.dart';
 import 'package:foodly/models/foods_model.dart';
 import 'package:foodly/views/food/food_page.dart';
 import 'package:get/get.dart';
@@ -17,6 +19,7 @@ class FoodTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   // final controller = Get.put(CartController());
     return GestureDetector(
       onTap: () {
         Get.to(() => FoodPage(food: food));
@@ -29,7 +32,8 @@ class FoodTile extends StatelessWidget {
             height: 70.h,
             width: width,
             decoration: BoxDecoration(
-                color: color??kOffWhite, borderRadius: BorderRadius.circular(9.r)),
+                color: color ?? kOffWhite,
+                borderRadius: BorderRadius.circular(9.r)),
             child: Container(
               padding: EdgeInsets.all(4.r),
               child: Row(
@@ -140,7 +144,16 @@ class FoodTile extends StatelessWidget {
             right: 75.w,
             top: 6.h,
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                // var data = CartRequest(
+                //     productId: food.id,
+                //     additives: [],
+                //     quantity: 1,
+                //     totalPrice: food.price);
+
+                // String cart = cartRequestToJson(data);
+                // controller.addToCart(cart);
+              },
               child: Container(
                 width: 19.w,
                 height: 19.h,
