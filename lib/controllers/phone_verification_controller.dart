@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_final_fields
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:foodly/constants/constants.dart';
 import 'package:foodly/models/api_error.dart';
 import 'package:foodly/models/login_response.dart';
+import 'package:foodly/views/main_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -19,7 +18,6 @@ class PhoneVerificationController extends GetxController {
 
   set setPhoneNumber(String value) {
     _phone = value;
-
   }
 
   RxBool _isLoading = false.obs;
@@ -44,6 +42,7 @@ class PhoneVerificationController extends GetxController {
     try {
       var response = await http.get(url, headers: headers);
 
+      print(response.statusCode);
       if (response.statusCode == 200) {
         LoginResponse data = loginResponseFromJson(response.body);
 
@@ -55,7 +54,6 @@ class PhoneVerificationController extends GetxController {
         box.write("userId", data.id);
         box.write("verification", data.verification);
 
-        setLoading = false;
 
         Get.snackbar(
             "You are succefully verified", "Enjoy your awesome experience",
@@ -63,7 +61,9 @@ class PhoneVerificationController extends GetxController {
             backgroundColor: kPrimary,
             icon: const Icon(Ionicons.fast_food_outline));
 
-        Get.back();
+        Get.offAll(() => MainScreen());
+        setLoading = false;
+
       } else {
         var error = apiErrorFromJson(response.body);
 

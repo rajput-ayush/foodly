@@ -7,11 +7,14 @@ import 'package:foodly/common/app_style.dart';
 import 'package:foodly/common/custom_button.dart';
 import 'package:foodly/common/custom_text_field.dart';
 import 'package:foodly/common/reusable_text.dart';
+import 'package:foodly/common/verification_model.dart';
 import 'package:foodly/constants/constants.dart';
 import 'package:foodly/controllers/foods_controller.dart';
+import 'package:foodly/controllers/login_controller.dart';
 import 'package:foodly/hooks/fetch_restaurant.dart';
 import 'package:foodly/models/foods_model.dart';
-import 'package:foodly/views/auth/phone_verification_page.dart';
+import 'package:foodly/models/login_response.dart';
+import 'package:foodly/views/auth/login_page.dart';
 import 'package:foodly/views/restaurant/restaurant_page.dart';
 import 'package:get/get.dart';
 
@@ -30,8 +33,12 @@ class _FoodPageState extends State<FoodPage> {
 
   @override
   Widget build(BuildContext context) {
+    LoginResponse? user;
     final hookResult = useFetchRestaurant(widget.food.restaurant);
     final controller = Get.put(FoodController());
+    final loginController = Get.put(LoginController());
+
+    user = loginController.getUserInfo();
     controller.loadAdditives(widget.food.additives);
     return Scaffold(
       body: ListView(
@@ -99,17 +106,18 @@ class _FoodPageState extends State<FoodPage> {
                   ),
                 ),
                 Positioned(
-                    bottom: 10,
-                    right: 12.w,
-                    child: CustomButton(
-                      onTap: () {
-                        Get.to(() => RestaurantPage(
-                              restaurant: hookResult.data,
-                            ));
-                      },
-                      btnWidth: 120.w,
-                      text: "Open Restaurant",
-                    )),
+                  bottom: 10,
+                  right: 12.w,
+                  child: CustomButton(
+                    onTap: () {
+                      Get.to(() => RestaurantPage(
+                            restaurant: hookResult.data,
+                          ));
+                    },
+                    btnWidth: 120.w,
+                    text: "Open Restaurant",
+                  ),
+                ),
               ],
             ),
           ),
@@ -130,7 +138,7 @@ class _FoodPageState extends State<FoodPage> {
                     Obx(
                       () => ReusableText(
                           text:
-                              "\$ ${((widget.food.price + controller.additivePrice).toStringAsFixed(2)  * controller.count.value)}",
+                              "\$ ${((widget.food.price + controller.additivePrice) * controller.count.value)}",
                           style: appStyle(18, kPrimary, FontWeight.w600)),
                     )
                   ],
@@ -230,9 +238,9 @@ class _FoodPageState extends State<FoodPage> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            controller.decrement();
+                            controller.increment();
                           },
-                          child: const Icon(AntDesign.minuscircleo),
+                          child: const Icon(AntDesign.pluscircleo),
                         ),
                         Padding(
                             padding:
@@ -244,9 +252,9 @@ class _FoodPageState extends State<FoodPage> {
                             )),
                         GestureDetector(
                           onTap: () {
-                            controller.increment();
+                            controller.decrement();
                           },
-                          child: const Icon(AntDesign.pluscircleo),
+                          child: const Icon(AntDesign.minuscircleo),
                         )
                       ],
                     ),
@@ -283,7 +291,13 @@ class _FoodPageState extends State<FoodPage> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          showVerificationSheet(context);
+                          if (user == null) {
+                            Get.to(() => const LoginPage());
+                          } else if (user.phoneVerification == false) {
+                            showVerificationSheet(context);
+                          } else {
+                            print("Place Order");
+                          }
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -314,69 +328,4 @@ class _FoodPageState extends State<FoodPage> {
       ),
     );
   }
-}
-
-Future<dynamic> showVerificationSheet(BuildContext context) {
-  return showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      showDragHandle: true,
-      builder: (BuildContext context) {
-        return Container(
-          height: 500.h,
-          width: width,
-          decoration: BoxDecoration(
-            image: const DecorationImage(
-                image: AssetImage("assets/images/restaurant_bk.png"),
-                fit: BoxFit.fill),
-            color: kLightWhite,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12.r),
-              topRight: Radius.circular(12.r),
-            ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(8.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 10.h,
-                ),
-                ReusableText(
-                    text: "Verify Your Phone Number",
-                    style: appStyle(18, kPrimary, FontWeight.w600)),
-                SizedBox(
-                    height: 250.h,
-                    child: Column(
-                      children:
-                          List.generate(verificationReasons.length, (index) {
-                        return ListTile(
-                          leading: const Icon(
-                            Icons.check_circle_outline,
-                            color: kPrimary,
-                          ),
-                          title: Text(
-                            verificationReasons[index],
-                            textAlign: TextAlign.justify,
-                            style: appStyle(11, kGrayLight, FontWeight.normal),
-                          ),
-                        );
-                      }),
-                    )),
-                SizedBox(
-                  height: 10.h,
-                ),
-                CustomButton(
-                  text: "Verify  Phone Number",
-                  btnHeight: 35.h,
-                  onTap: () {
-                    Get.to(() => const PhoneVerificationPage());
-                  },
-                )
-              ],
-            ),
-          ),
-        );
-      });
 }

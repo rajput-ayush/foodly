@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "88462542254",
+    "project_id": "foodly-flutter-ad645",
+    "storage_bucket": "foodly-flutter-ad645.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88462542254:android:1cdef1ae43555a3024343f",
+        "android_client_info": {
+          "package_name": "com.example.foodly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88462542254-7jfnfr5jdecg6oems80ad2hta10q3cit.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXtQbICs44njoaCJ-rCNxBbNPd7J5g9kw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "88462542254-7jfnfr5jdecg6oems80ad2hta10q3cit.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "88462542254-ghqq4rm1tpl0h1ev6e7j81cloqlls0m9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.foodly"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
